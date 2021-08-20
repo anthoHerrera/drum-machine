@@ -41,9 +41,8 @@ export class DrumPad extends Component {
             sound.play();
             this.activatePad();
             setTimeout(() => this.activatePad(), 100);
+            this.props.updateDisplay(this.props.clipId.replace(/-/g, " "));
         }
-
-        //this.props.updateDisplay(this.props.clipId.replace(/-/g, " "));
     }
 
     activatePad() {

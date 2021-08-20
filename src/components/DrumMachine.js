@@ -18,6 +18,7 @@ export class DrumMachine extends Component {
         this.displayClipName = this.displayClipName.bind(this);
         this.adjustVolume = this.adjustVolume.bind(this);
         this.clearDisplay = this.clearDisplay.bind(this);
+        this.updateDisplay = this.updateDisplay.bind(this);
     }
 
     powerControl() {
@@ -67,6 +68,14 @@ export class DrumMachine extends Component {
         });
     }
 
+    updateDisplay(text) {
+        if (this.state.power) {
+            this.setState({
+                display: text,
+            });
+        }
+    }
+
     render() {
         const powerSlider = this.state.power
             ? {
@@ -97,6 +106,7 @@ export class DrumMachine extends Component {
                 <BankPad
                     currentBank={this.state.bank}
                     power={this.state.power}
+                    updateDisplay={this.updateDisplay}
                 />
                 <div id="controls-container">
                     <div className="control">
