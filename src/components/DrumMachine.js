@@ -83,6 +83,15 @@ export class DrumMachine extends Component {
                 : {
                       float: "right",
                   };
+
+        {
+            const drumPadClips = [].slice.call(
+                document.getElementsByClassName("clip")
+            );
+            drumPadClips.forEach((drumPadClip) => {
+                drumPadClip.volume = this.state.volume;
+            });
+        }
         return (
             <div id="drum-machine">
                 <BankPad
