@@ -1,0 +1,239 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+#drum-machine {
+    background-color: lightgrey;
+    width: 600px;
+    height: 300px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    justify-content: center;
+    align-content: center;
+    outline: 5px solid brown;
+    font-family: "Bebas Neue", cursive;
+    font-size: 1.3em;
+}
+
+#bankPad {
+    /*display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;*/
+    display: grid;
+    grid-template-rows: repeat(3, minmax(80px, 1fr));
+    grid-template-columns: repeat(3, minmax(90px, 1fr));
+    column-gap: 7px;
+    row-gap: 7px;
+    margin-left: auto;
+
+    .drum-pad {
+        background-color: grey;
+        //flex: 0 0 32%; /* don't grow, don't shrink, width */
+        /*width: 30px;
+        height: 70px;
+        margin-bottom: 4px;
+        box-shadow: 3px 3px #2D2424;
+        border-radius: 5px;*/
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 3px 3px #2d2424;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .drum-pad:active {
+        background-color: #bd1616;
+        box-shadow: 3px 2px #2d2424;
+        transform: translateY(3px);
+    }
+}
+
+#controls-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .control {
+        width: 100px;
+        margin: auto;
+        p {
+            margin-bottom: 0;
+        }
+        .select {
+            @extend .outer-select;
+            .inner {
+                @extend .inner-select;
+            }
+        }
+    }
+    #display {
+        width: 200px;
+        background-color: gray;
+        margin: 15px auto;
+        padding: 15px;
+        //box-sizing: border-box;
+    }
+}
+
+.outer-select {
+    margin: auto;
+    border: 1px solid black;
+    width: 50px;
+    height: 25px;
+    padding: 1px;
+    background-color: black;
+}
+
+.inner-select {
+    width: 23px;
+    height: 19px;
+    background: blue;
+    border: 1px solid black;
+    //box-sizing: border-box;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 650px) {
+    .inner-container {
+        transform: scale(0.7);
+    }
+}
+// CUSTOM RANGE INPUT : Credit : https://github.com/darlanrod/input-range-scss/blob/master/_inputrange.scss
+
+$track-color: #424242 !default;
+$thumb-color: blue !default;
+
+$thumb-radius: 0 !default;
+$thumb-height: 25px !default;
+$thumb-width: 8px !default;
+$thumb-shadow-size: 1px !default;
+$thumb-shadow-blur: 1px !default;
+$thumb-shadow-color: #111 !default;
+$thumb-border-width: 0 !default;
+$thumb-border-color: #fff !default;
+
+$track-width: 16em !default;
+$track-height: 5px !default;
+$track-shadow-size: 2px !default;
+$track-shadow-blur: 2px !default;
+$track-shadow-color: #222 !default;
+$track-border-width: 1px !default;
+$track-border-color: #000 !default;
+
+$track-radius: 0 !default;
+$contrast: 5% !default;
+
+@mixin shadow($shadow-size, $shadow-blur, $shadow-color) {
+    box-shadow: $shadow-size $shadow-size $shadow-blur $shadow-color,
+        0 0 $shadow-size lighten($shadow-color, 5%);
+}
+
+@mixin track() {
+    width: $track-width;
+    height: $track-height;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+@mixin thumb() {
+    @include shadow(
+        $thumb-shadow-size,
+        $thumb-shadow-blur,
+        $thumb-shadow-color
+    );
+    border: $thumb-border-width solid $thumb-border-color;
+    height: $thumb-height;
+    width: $thumb-width;
+    border-radius: $thumb-radius;
+    background: $thumb-color;
+    cursor: pointer;
+}
+
+[type="range"] {
+    -webkit-appearance: none;
+    margin: $thumb-height / 2 0;
+    width: $track-width;
+
+    &:focus {
+        outline: none;
+    }
+
+    &::-webkit-slider-runnable-track {
+        @include track();
+        @include shadow(
+            $track-shadow-size,
+            $track-shadow-blur,
+            $track-shadow-color
+        );
+        background: $track-color;
+        border: $track-border-width solid $track-border-color;
+        border-radius: $track-radius;
+    }
+
+    &::-webkit-slider-thumb {
+        @include thumb();
+        -webkit-appearance: none;
+        margin-top: ((-$track-border-width * 2 + $track-height) / 2) -
+            ($thumb-height / 2);
+    }
+
+    &:focus::-webkit-slider-runnable-track {
+        background: lighten($track-color, $contrast);
+    }
+
+    &::-moz-range-track {
+        @include track();
+        @include shadow(
+            $track-shadow-size,
+            $track-shadow-blur,
+            $track-shadow-color
+        );
+        background: $track-color;
+        border: $track-border-width solid $track-border-color;
+        border-radius: $track-radius;
+    }
+
+    &::-moz-range-thumb {
+        @include thumb();
+    }
+
+    &::-ms-track {
+        @include track();
+        background: transparent;
+        border-color: transparent;
+        border-width: $thumb-width 0;
+        color: transparent;
+    }
+
+    &::-ms-fill-lower {
+        @include shadow(
+            $track-shadow-size,
+            $track-shadow-blur,
+            $track-shadow-color
+        );
+        background: darken($track-color, $contrast);
+        border: $track-border-width solid $track-border-color;
+        border-radius: $track-radius * 2;
+    }
+
+    &::-ms-fill-upper {
+        @include shadow(
+            $track-shadow-size,
+            $track-shadow-blur,
+            $track-shadow-color
+        );
+        background: $track-color;
+        border: $track-border-width solid $track-border-color;
+        border-radius: $track-radius * 2;
+    }
+
+    &::-ms-thumb {
+        @include thumb();
+    }
+
+    &:focus::-ms-fill-lower {
+        background: $track-color;
+    }
+
+    &:focus::-ms-fill-upper {
+        background: lighten($track-color, $contrast);
+    }
+}
